@@ -1,19 +1,20 @@
 import Elysia from "elysia";
 import { html } from "@elysiajs/html";
+import * as elements from "typed-html";
 
-const baseHtml = () => 
-<html lang="en">
-<head>
-    <title>📜 Todo app</title>
-</head>
-<body>
-    <h1>ToDo app with BETH stack</h1>
-</body>
-</html>
+const BaseHtml = ({ children }: elements.Children) =>
+    <html lang="en">
+        <head>
+            <title>📜 Todo app</title>
+        </head>
+        <body>
+            {children}
+        </body>
+    </html>
 
 const app = new Elysia()
     .use(html())
-    .get("/", baseHtml)
+    .get("/", ({ html }) => html(<BaseHtml>Hello World</BaseHtml>))
     .listen(3000);
 
 console.log(`Server started on port: http://localhost:${app.server?.port}`)
