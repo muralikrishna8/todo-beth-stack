@@ -1,8 +1,9 @@
-import Elysia from "elysia";
+import Elysia, { t } from "elysia";
 import { html } from "@elysiajs/html";
 import type { Children } from "typed-html";
 import { TodoList } from "./todo/view/todos";
-import { db } from "./todo/todos";
+import { db, type Todo } from "./todo/todos";
+import { TodoItem } from "./todo/view/todoItem";
 
 const app = new Elysia()
     .use(html())
@@ -16,6 +17,17 @@ const app = new Elysia()
         </BaseHtml >
     ))
     .get("/todos", <TodoList todos={db} />)
+    .post("/todos/toggle/:id", ({ params }) => {
+        const todo = db.find(({ id }: Todo) => params.id === id);
+        if (todo) {
+            todo.completed = !todo.completed
+            return <TodoItem {...todo} />
+        }
+    }, {
+        params: t.Object({
+            id: t.Numeric()
+        })
+    })
     .listen(3000);
 
 console.log(`Server started on port: http://localhost:${app.server?.port}`)
