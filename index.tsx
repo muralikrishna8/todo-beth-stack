@@ -36,6 +36,19 @@ const app = new Elysia()
             db.splice(db.indexOf(todo), 1);
         }
     }, idValidation)
+    .post("/todos", ({ body }) => {
+        const newTodo: Todo = {
+            id: crypto.randomUUID(),
+            completed: false,
+            content: body.content
+        };
+        db.push(newTodo);
+        return <TodoItem {...newTodo} />
+    }, {
+        body: t.Object({
+            content: t.String()
+        })
+    })
     .listen(3000);
 
 console.log(`Server started on port: http://localhost:${app.server?.port}`)
