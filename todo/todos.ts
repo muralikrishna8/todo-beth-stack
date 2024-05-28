@@ -1,5 +1,5 @@
 export type Todo = {
-    id: number;
+    id: ReturnType<Crypto["randomUUID"]>;
     content: string;
     completed: boolean;
 }
@@ -7,12 +7,12 @@ export type Todo = {
 export const db: Todo[] = [
     {
         completed: false,
-        id: 1,
+        id: "123-123-123-123-123",
         content: "this is some todo"
     },
     {
         completed: true,
-        id: 2,
+        id: "123-123-123-123-124",
         content: "this is another todo"
     }
 ];

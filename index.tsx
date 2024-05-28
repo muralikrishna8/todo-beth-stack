@@ -7,7 +7,7 @@ import { TodoItem } from "./todo/view/todoItem";
 
 const idValidation = {
     params: t.Object({
-        id: t.Numeric()
+        id: t.String()
     })
 };
 
