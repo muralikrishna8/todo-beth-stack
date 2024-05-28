@@ -9,5 +9,9 @@ export const TodoItem = ({ content, completed, id }: Todo) => <div class="flex f
         hx-swap="outerHTML"
     />
     <p>{content}</p>
-    <button class="text-red-500">🗑️</button>
+    <button
+        hx-delete={`/todos/${id}`}
+        hx-target="closest div"
+        hx-swap="outerHTML"
+     >🗑️</button>
 </div>

@@ -5,6 +5,12 @@ import { TodoList } from "./todo/view/todos";
 import { db, type Todo } from "./todo/todos";
 import { TodoItem } from "./todo/view/todoItem";
 
+const idValidation = {
+    params: t.Object({
+        id: t.Numeric()
+    })
+};
+
 const app = new Elysia()
     .use(html())
     .get("/", ({ html }) => html(
@@ -23,11 +29,13 @@ const app = new Elysia()
             todo.completed = !todo.completed
             return <TodoItem {...todo} />
         }
-    }, {
-        params: t.Object({
-            id: t.Numeric()
-        })
-    })
+    }, idValidation)
+    .delete("/todos/:id", ({ params }) => {
+        const todo = db.find(({ id }: Todo) => params.id === id);
+        if (todo) {
+            db.splice(db.indexOf(todo), 1);
+        }
+    }, idValidation)
     .listen(3000);
 
 console.log(`Server started on port: http://localhost:${app.server?.port}`)
