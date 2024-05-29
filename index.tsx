@@ -2,12 +2,14 @@ import Elysia, { t } from "elysia";
 import { html } from "@elysiajs/html";
 import type { Children } from "typed-html";
 import { TodoList } from "./todo/view/todos";
-import { db, type Todo } from "./todo/todos";
+import { db } from "./todo/db";
+import { type Todo, todos } from "./todo/db/schema";
 import { TodoItem } from "./todo/view/todoItem";
+import { eq } from "drizzle-orm/sqlite-core/expressions";
 
 const idValidation = {
     params: t.Object({
-        id: t.String()
+        id: t.Numeric()
     })
 };
 
@@ -22,28 +24,32 @@ const app = new Elysia()
             ></body>
         </BaseHtml >
     ))
-    .get("/todos", <TodoList todos={db} />)
-    .post("/todos/toggle/:id", ({ params }) => {
-        const todo = db.find(({ id }: Todo) => params.id === id);
-        if (todo) {
-            todo.completed = !todo.completed
-            return <TodoItem {...todo} />
+    .get("/todos", async () => {
+        const data = await db.select().from(todos).all();
+        return <TodoList todos={data} />
+    })
+    .post("/todos/toggle/:id", async ({ params }) => {
+        const oldTodo = await db.select()
+            .from(todos)
+            .where(eq(todos.id, params.id))
+            .get()
+
+        if (oldTodo) {
+            const updatedTodo = await db.update(todos)
+                .set({ completed: !oldTodo.completed })
+                .where(eq(todos.id, oldTodo.id))
+                .returning().get()
+            return <TodoItem {...updatedTodo} />
         }
     }, idValidation)
-    .delete("/todos/:id", ({ params }) => {
-        const todo = db.find(({ id }: Todo) => params.id === id);
-        if (todo) {
-            db.splice(db.indexOf(todo), 1);
-        }
+    .delete("/todos/:id", async ({ params }) => {
+        await db.delete(todos).where(eq(todos.id, params.id))
     }, idValidation)
-    .post("/todos", ({ body }) => {
-        const newTodo: Todo = {
-            id: crypto.randomUUID(),
-            completed: false,
-            content: body.content
-        };
-        db.push(newTodo);
-        return <TodoItem {...newTodo} />
+    .post("/todos", async ({ body }) => {
+        const todo = await db.insert(todos)
+            .values({ content: body.content })
+            .returning().get();
+        return <TodoItem {...todo} />
     }, {
         body: t.Object({
             content: t.String()

@@ -1,4 +1,4 @@
-import type { Todo } from "../todos";
+import type { Todo } from "../db/schema";
 import { TodoForm } from "./todoForm";
 import { TodoItem } from "./todoItem";
 

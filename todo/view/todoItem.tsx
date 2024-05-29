@@ -1,4 +1,4 @@
-import type { Todo } from "../todos";
+import type { Todo } from "../db/schema";
 
 export const TodoItem = ({ content, completed, id }: Todo) => <div class="flex flex-row space-x-3">
     <input
