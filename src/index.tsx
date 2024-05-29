@@ -18,7 +18,7 @@ const app = new Elysia()
     .get("/", ({ html }) => html(
         <BaseHtml>
             <body
-                class="flex w-full h-screen justify-center items-center"
+                class="flex w-full h-screen justify-center items-center bg-zinc-900 text-white"
                 hx-get="/todos"
                 hx-trigger="load"
             ></body>

@@ -13,5 +13,6 @@ export const TodoItem = ({ content, completed, id }: Todo) => <div class="flex f
         hx-delete={`/todos/${id}`}
         hx-target="closest div"
         hx-swap="outerHTML"
+        title="delete todo"
      >🗑️</button>
 </div>
