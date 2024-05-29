@@ -1,6 +1,6 @@
 {
   "name": "todo-beth",
-  "module": "index.tsx",
+  "module": "src/index.tsx",
   "type": "module",
   "scripts": {
     "db:push": "bunx drizzle-kit push",
