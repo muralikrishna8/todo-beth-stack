@@ -1,10 +1,10 @@
 import Elysia, { t } from "elysia";
 import { html } from "@elysiajs/html";
 import type { Children } from "typed-html";
-import { TodoList } from "./todo/view/todos";
-import { db } from "./todo/db";
-import { type Todo, todos } from "./todo/db/schema";
-import { TodoItem } from "./todo/view/todoItem";
+import { TodoList } from "./view/todos";
+import { db } from "./db";
+import { type Todo, todos } from "./db/schema";
+import { TodoItem } from "./view/todoItem";
 import { eq } from "drizzle-orm/sqlite-core/expressions";
 
 const idValidation = {
