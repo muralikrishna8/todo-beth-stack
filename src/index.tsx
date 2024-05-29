@@ -1,4 +1,4 @@
-import Elysia, { t } from "elysia";
+import Elysia, { error, t } from "elysia";
 import { html } from "@elysiajs/html";
 import type { Children } from "typed-html";
 import { TodoList } from "./view/todos";
@@ -46,6 +46,9 @@ const app = new Elysia()
         await db.delete(todos).where(eq(todos.id, params.id))
     }, idValidation)
     .post("/todos", async ({ body }) => {
+        if (body.content.length === 0) {
+            return error(400, "Content cannot be empty")
+        }
         const todo = await db.insert(todos)
             .values({ content: body.content })
             .returning().get();
@@ -64,6 +67,7 @@ const BaseHtml = ({ children }: Children) =>
         <head>
             <title>📜 Todo app</title>
             <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+            <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/response-targets.js"></script>
             <script src="https://cdn.tailwindcss.com"></script>
             <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
         </head>
