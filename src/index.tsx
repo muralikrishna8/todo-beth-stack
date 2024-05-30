@@ -58,7 +58,7 @@ const app = new Elysia()
             content: t.String()
         })
     })
-    .listen(3000);
+    .listen(process.env.PORT as string);
 
 console.log(`Server started on port: http://localhost:${app.server?.port}`)
 
