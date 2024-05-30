@@ -7,6 +7,7 @@ export const TodoItem = ({ content, completed, id }: Todo) => <div class="flex f
         hx-post={`/todos/toggle/${id}`}
         hx-target="closest div"
         hx-swap="outerHTML"
+        class="accent-[#eb9a78] w-4"
     />
     <p>{content}</p>
     <button
