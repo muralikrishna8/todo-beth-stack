@@ -4,6 +4,8 @@ COPY package.json .
 COPY bun.lockb .
 RUN bun install
 
+RUN bun run css
+
 COPY . .
  
 EXPOSE 8000
