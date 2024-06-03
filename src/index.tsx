@@ -62,7 +62,6 @@ const BaseHtml = () =>
             <title>📜 Todo app</title>
             <script src="https://unpkg.com/htmx.org@1.9.12"></script>
             <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/response-targets.js"></script>
-            <script src="https://cdn.tailwindcss.com"></script>
             <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
             <link rel="stylesheet" href="public/styles.css" />
             <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -6,6 +6,7 @@ RUN bun install
 
 RUN mkdir -p src
 COPY src/input.css ./src/input.css 
+COPY tailwind.config.js .
 RUN bun run css
 
 COPY . .
