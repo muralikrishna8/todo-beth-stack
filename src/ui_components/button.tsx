@@ -1,6 +1,6 @@
-export const Button = ({ type, children }: ({ type: string, children: HTMLElement | string })) =>
+export const Button = (params: ({ type: string, children: HTMLElement | string, 'class': string })) =>
     <button
-        class="bg-greenish-primary h-10 px-6 font-semibold rounded-full"
-        type={type}>
-        {children}
+        class={`bg-greenish-primary h-10 px-10 font-semibold rounded-full ${params.class}`}
+        type={params.type}>
+        {params.children}
     </button>
