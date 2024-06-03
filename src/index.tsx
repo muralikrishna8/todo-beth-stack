@@ -1,10 +1,9 @@
 import Elysia, { error, t } from "elysia";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from "@elysiajs/static";
-import type { Children } from "typed-html";
 import { TodoList } from "./view/todos";
 import { db } from "./db";
-import { type Todo, todos } from "./db/schema";
+import { todos } from "./db/schema";
 import { TodoItem } from "./view/todoItem";
 import { eq } from "drizzle-orm/sqlite-core/expressions";
 import Footer from "./view/footer";
