@@ -3,6 +3,8 @@ import Footer from "./footer";
 const BaseHtml = () =>
     <html lang="en">
         <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>📜 Todo app</title>
             <script src="https://unpkg.com/htmx.org@1.9.12"></script>
             <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/response-targets.js"></script>
@@ -15,7 +17,7 @@ const BaseHtml = () =>
 
         <body class="bg-greenish-tertiary">
             <main
-                class="flex w-full h-screen justify-center items-center text-zinc-800"
+                class="flex h-screen justify-center items-center text-zinc-800 m-2.5"
                 hx-get="/todos"
                 hx-trigger="load"
             ></main>
