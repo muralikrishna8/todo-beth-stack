@@ -4,12 +4,8 @@ COPY package.json .
 COPY bun.lockb .
 RUN bun install
 
-RUN mkdir -p src
-COPY src/input.css ./src/input.css 
-COPY tailwind.config.js .
-RUN bun run css
-
 COPY . .
+RUN bun run css
  
 EXPOSE 8000
  
