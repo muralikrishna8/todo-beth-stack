@@ -5,6 +5,8 @@
   "scripts": {
     "css": "bunx tailwindcss -i src/input.css -o ./public/styles.css",
     "dev": "bun run --hot src/index.tsx",
+    "db:generate": "bunx drizzle-kit generate",
+    "db:migrate": "bun run src/db/migrate.ts",
     "db:push": "bunx drizzle-kit push",
     "db:studio": "bunx drizzle-kit studio"
   },
