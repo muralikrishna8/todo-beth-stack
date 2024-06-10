@@ -9,7 +9,7 @@ export default {
         "light-olive-green": {
           primary: "#A4BCA4",
           secondary: "#E4F4E4",
-          accent: "#A46430",
+          accent: "#eb9a78",
           neutral: "#fff",
           "base-100": "#fff",
           info: "#f2f2f2",
